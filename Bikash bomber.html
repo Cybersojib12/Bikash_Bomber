@@ -1,0 +1,189 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> CYBER SOJIB BKASH BOMBER</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap');
+
+        body {
+            font-family: 'Orbitron', sans-serif;
+            background-color: #0A0F1F;
+            color: #00E5FF;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .logo-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        footer {
+            width: 90%;
+            height: 28px;
+            background-image: url('footer2.png'); /* Custom footer image */
+            background-size: cover;
+            background-position: center;
+            box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.6);
+        }
+
+        .credit {
+            margin: 20px 0;
+            font-family: 'Roboto', sans-serif;
+            font-size: 1rem;
+            color: #ddd;
+        }
+
+        .credit a {
+            color: #ffd700;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .credit a:hover {
+            color: #fff;
+            text-decoration: underline;
+        }
+
+        .logo-container img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 4px solid #00E5FF;
+            box-shadow: 0px 0px 15px #00E5FF;
+        }
+
+        h2 {
+            font-size: 20px;
+            text-shadow: 0px 0px 10px #00E5FF;
+        }
+
+        form {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            display: inline-block;
+            box-shadow: 0px 0px 15px #00E5FF;
+        }
+
+        input, button {
+            padding: 12px;
+            margin: 10px;
+            font-size: 18px;
+            width: 80%;
+            max-width: 300px;
+            border-radius: 5px;
+            border: none;
+            text-align: center;
+            outline: none;
+        }
+
+        input {
+            background-color: #1E2A47;
+            color: #00E5FF;
+            border: 2px solid #00E5FF;
+        }
+
+        input::placeholder {
+            color: #00E5FF99;
+        }
+
+        button {
+            cursor: pointer;
+            background: linear-gradient(90deg, #0077FF, #00E5FF);
+            color: white;
+            font-weight: bold;
+            transition: 0.3s;
+            border-radius: 25px;
+            width: 85%;
+            max-width: 320px;
+            box-shadow: 0px 0px 10px #00E5FF;
+        }
+
+        button:hover {
+            background: linear-gradient(90deg, #00E5FF, #0077FF);
+            box-shadow: 0px 0px 20px #00E5FF;
+        }
+
+        .message {
+            font-size: 18px;
+            font-weight: bold;
+            padding: 10px;
+        }
+
+        .success {
+            color: #00FF88;
+            text-shadow: 0px 0px 10px #00FF88;
+        }
+
+        .error {
+            color: #FF4444;
+            text-shadow: 0px 0px 10px #FF4444;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="logo-container">
+        <img src="https://assets-v2.lottiefiles.com/a/12bc3460-1187-11ee-9671-4f64f023dd62/WAwAOGBw9n.gif" alt="Logo">
+    </div>
+
+    <h2> CYBER SOJIB BKASH BOMBER</h2>
+    
+    <form id="bomberForm">
+        <label>Phone Number:</label>
+        <input type="text" name="phone" required placeholder="019XXXXXXXX"><br>
+        <label>Amount (Bob: 60):</label>
+        <input type="number" name="amount" min="1" max="60" required><br>
+        <button type="submit">Send</button>
+    </form>
+
+    <div id="responseMessage"></div>
+
+    <center><footer></footer>
+    <div class="credit">
+        AUTHOR: <a href="t.me/Cybersojib243" target="_blank">VISIT NOW</a>
+    </div></center>
+
+    <script>
+    document.getElementById("bomberForm").addEventListener("submit", function(event) {
+        event.preventDefault(); // ফর্ম সাবমিট বন্ধ করা
+
+        let phone = document.querySelector('input[name="phone"]').value;
+        let amount = document.querySelector('input[name="amount"]').value;
+
+        // API URL (send.php ফাইল ব্যবহার করা)
+        let apiUrl = "send.php";
+
+        // Form Data তৈরি করা
+        let formData = new FormData();
+        formData.append("phone", phone);
+        formData.append("amount", amount);
+
+        // API-তে POST Request পাঠানো
+        fetch(apiUrl, {
+            method: "POST",
+            body: formData,
+        })
+        .then(response => response.json())
+        .then(data => {
+            let messageDiv = document.getElementById("responseMessage");
+            if (data.success) {
+                messageDiv.innerHTML = "<p class='success'>" + data.message + "</p>";
+            } else {
+                messageDiv.innerHTML = "<p class='error'>" + data.message + "</p>";
+            }
+        })
+        .catch(error => {
+            console.error("Error:", error);
+            document.getElementById("responseMessage").innerHTML = "<p class='error'>API Request Failed!</p>";
+        });
+    });
+    </script>
+
+</body>
+</html>
